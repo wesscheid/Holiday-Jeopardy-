@@ -8,7 +8,7 @@ import FinalJeopardy from './components/FinalJeopardy';
 import GameOver from './components/GameOver';
 import Snowfall from './components/Snowfall';
 import { FALLBACK_GAME_DATA } from './constants';
-import { Snowflake, Gift, Loader2, Play, Plus, Trash2, ArrowRight, Maximize, Minimize, AlertCircle } from 'lucide-react';
+import { Gift, Loader2, Play, Plus, Trash2, ArrowRight, Maximize, Minimize, AlertCircle } from 'lucide-react';
 
 const App: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>(GameState.SETUP);
@@ -53,9 +53,14 @@ const App: React.FC = () => {
       const data = await generateGameData(customTopic);
       setGameData(data);
       setGameState(GameState.PLAYING);
-    } catch (err) {
-      console.error("Game generation failed, using fallback:", err);
-      setError("AI generation failed (likely API key missing in build). Falling back to default holiday questions.");
+    } catch (err: any) {
+      console.error("Game generation failed:", err);
+      // More descriptive error for the host
+      const errorMsg = err.message?.includes("API Key") 
+        ? "API Key is missing from the environment. Check your deployment secrets."
+        : "Failed to generate board for this topic. Using holiday defaults.";
+      
+      setError(errorMsg);
       setGameData(JSON.parse(JSON.stringify(FALLBACK_GAME_DATA)));
       setGameState(GameState.PLAYING);
     }
@@ -219,7 +224,7 @@ const App: React.FC = () => {
           <div className="flex-1 flex flex-col items-center justify-center">
             <Loader2 className="w-16 h-16 text-hol-gold animate-spin mb-4" />
             <h2 className="text-2xl font-slab font-bold animate-pulse">Asking Santa's Elves (Gemini)...</h2>
-            <p className="text-gray-400 mt-2 text-center">Thinking of clues for "{customTopic}"</p>
+            <p className="text-gray-400 mt-2 text-center italic">Crafting questions about "{customTopic}"</p>
           </div>
         )}
 

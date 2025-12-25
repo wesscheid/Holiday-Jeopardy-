@@ -1,31 +1,34 @@
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { GameData } from "../types";
-import { FALLBACK_GAME_DATA } from "../constants";
 
 const getClient = () => {
   const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    throw new Error("API Key not found");
+  if (!apiKey || apiKey === "undefined") {
+    throw new Error("API Key is missing or undefined. Ensure it's set in your deployment environment secrets.");
   }
   return new GoogleGenAI({ apiKey });
 };
 
-export const generateGameData = async (customTopic: string = "Christmas and Holidays"): Promise<GameData> => {
+export const generateGameData = async (customTopic: string = "Christmas Traditions"): Promise<GameData> => {
   try {
     const ai = getClient();
-    const modelId = "gemini-3-flash-preview"; 
+    // Using Pro for complex JSON structure generation
+    const modelId = "gemini-3-pro-preview"; 
 
-    const response = await ai.models.generateContent({
-      model: modelId,
-      contents: `Generate a full Jeopardy-style game board specifically about the topic: "${customTopic}". 
+    const prompt = `Generate a full Jeopardy-style game board specifically about the topic: "${customTopic}". 
       Requirements:
       1. Create exactly 5 unique categories related to "${customTopic}". 
       2. Each category must have exactly 5 questions with dollar values 200, 400, 600, 800, 1000.
       3. Create 1 "Final Jeopardy" question (category, clue, and answer) about "${customTopic}".
-      4. Clue format: "This character..." or "This event...".
-      5. Answer format: "Who is..." or "What is...".
-      Return ONLY a raw JSON object. Do not include markdown formatting or backticks.`,
+      4. Clue format: A statement like "This reindeer is famous for his red nose."
+      5. Answer format: A question like "Who is Rudolph?"
+      Return ONLY a raw JSON object.`;
+
+    const response = await ai.models.generateContent({
+      model: modelId,
+      contents: prompt,
       config: {
+        thinkingConfig: { thinkingBudget: 4000 },
         responseMimeType: "application/json",
         responseSchema: {
           type: Type.OBJECT,
@@ -67,22 +70,23 @@ export const generateGameData = async (customTopic: string = "Christmas and Holi
       },
     });
 
-    if (response.text) {
-      // Clean potential markdown backticks if AI ignores instruction
-      let cleanJson = response.text.trim();
+    const text = response.text;
+    if (text) {
+      let cleanJson = text.trim();
+      // Remove any markdown formatting if the model persists in adding it
       if (cleanJson.startsWith('```')) {
         cleanJson = cleanJson.replace(/^```(?:json)?/, '').replace(/```$/, '').trim();
       }
       
       const data = JSON.parse(cleanJson) as GameData;
       
-      // Post-process to ensure IDs and state are correct
+      // Ensure IDs and state are properly initialized
       data.categories = data.categories.map((cat, catIdx) => ({
         ...cat,
-        id: `cat-${catIdx}`,
+        id: `cat-${catIdx}-${Date.now()}`,
         questions: (cat.questions || []).map((q, qIdx) => ({
           ...q,
-          id: `q-${catIdx}-${qIdx}`,
+          id: `q-${catIdx}-${qIdx}-${Date.now()}`,
           isAnswered: false
         }))
       }));
@@ -90,13 +94,10 @@ export const generateGameData = async (customTopic: string = "Christmas and Holi
       return data;
     }
     
-    throw new Error("Empty response from AI");
+    throw new Error("Received empty response from the AI model.");
 
   } catch (error) {
-    console.error("Failed to generate game data", error);
-    // Rethrow so the UI can handle the error state if desired, 
-    // or return a special flag. For now, we return fallback but we'll 
-    // handle the display in App.tsx.
+    console.error("Game generation error:", error);
     throw error;
   }
 };
@@ -116,8 +117,8 @@ export const generateHint = async (clue: string, answer: string): Promise<string
 
     return response.text || "No hint available.";
   } catch (error) {
-    console.error("Hint generation failed", error);
-    return "Could not generate a hint at this time.";
+    console.error("Hint generation failed:", error);
+    return "Could not generate a hint.";
   }
 };
 

@@ -152,17 +152,10 @@ const App: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                 <div className="flex justify-between items-center mb-2">
+                 <div className="mb-2">
                     <label className="block text-sm font-bold text-hol-gold uppercase tracking-wider">Teams</label>
-                    <button 
-                        onClick={addTeam}
-                        disabled={teams.length >= 5}
-                        className="text-xs flex items-center gap-1 bg-hol-green/20 hover:bg-hol-green text-hol-green hover:text-white border border-hol-green px-3 py-1 rounded-full transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                    >
-                        <Plus className="w-3 h-3" /> Add Team
-                    </button>
                  </div>
-                 <div className="space-y-3">
+                 <div className="space-y-3 mb-4">
                     {teams.map((team, idx) => (
                        <div key={team.id} className="flex gap-2 animate-in slide-in-from-left-2 duration-300">
                          <input
@@ -188,6 +181,13 @@ const App: React.FC = () => {
                        </div>
                     ))}
                  </div>
+                 <button 
+                    onClick={addTeam}
+                    disabled={teams.length >= 5}
+                    className="w-full text-xs flex items-center justify-center gap-2 bg-hol-green/10 hover:bg-hol-green/20 text-hol-green border border-hol-green/30 px-3 py-2 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                 >
+                    <Plus className="w-3 h-3 group-hover:scale-125 transition-transform" /> Add Another Team
+                 </button>
               </div>
 
               <button 

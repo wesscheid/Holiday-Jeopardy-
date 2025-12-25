@@ -9,7 +9,7 @@ interface ScoreBoardProps {
 
 const ScoreBoard: React.FC<ScoreBoardProps> = ({ teams, onUpdateScore }) => {
   return (
-    <div className="w-full px-2 mt-4">
+    <div className="w-full px-2 mt-0">
       <div className="flex justify-center items-stretch gap-2 md:gap-4 w-full max-w-7xl mx-auto">
         {teams.map((team) => (
           <div 

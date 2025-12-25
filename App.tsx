@@ -252,7 +252,7 @@ const App: React.FC = () => {
                   </button>
                </div>
             )}
-            <div className="mt-auto pt-8">
+            <div className="mt-2">
               <ScoreBoard teams={teams} onUpdateScore={handleUpdateScore} />
             </div>
           </div>

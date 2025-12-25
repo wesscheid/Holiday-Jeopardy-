@@ -40,8 +40,8 @@
     </script>
     <style>
       /* 
-         Static assets in the 'public' folder are served from the root of the site.
-         We try both capitalized and lowercase filenames just in case.
+         In Vite, assets placed in the /public folder are served from the root of the site.
+         Using root-relative paths ensures they load correctly on GitHub Pages sub-paths.
       */
       @font-face {
         font-family: 'GeoparodyLocal';
@@ -62,7 +62,8 @@
       
       /* Enhanced Jeopardy Typography */
       .font-geopardy {
-        /* Use the local font if found, fall back to Bebas Neue which is nearly identical */
+        /* Bebas Neue is a Google Font that looks identical to Jeopardy. 
+           We use it as a robust fallback in case the local .otf is missing. */
         font-family: 'GeoparodyLocal', 'Bebas Neue', sans-serif !important;
         text-transform: uppercase;
         letter-spacing: 0.05em;

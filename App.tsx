@@ -55,10 +55,12 @@ const App: React.FC = () => {
       setGameState(GameState.PLAYING);
     } catch (err: any) {
       console.error("Game generation failed:", err);
-      // More descriptive error for the host
-      const errorMsg = err.message?.includes("API Key") 
-        ? "API Key is missing from the environment. Check your deployment secrets."
-        : "Failed to generate board for this topic. Using holiday defaults.";
+      // More descriptive error for the host if API key is likely the culprit
+      const isApiKeyMissing = err.message?.includes("API Key") || (typeof process !== 'undefined' && !process.env.API_KEY);
+      
+      const errorMsg = isApiKeyMissing
+        ? "API Key missing in build. Using fallback holiday board. (Check GitHub Secrets!)"
+        : "Failed to build board for this topic. Using holiday defaults.";
       
       setError(errorMsg);
       setGameData(JSON.parse(JSON.stringify(FALLBACK_GAME_DATA)));

@@ -3,7 +3,7 @@ import { GameData } from "../types";
 
 const getClient = () => {
   const apiKey = process.env.API_KEY;
-  if (!apiKey || apiKey === "undefined") {
+  if (!apiKey || apiKey === "undefined" || apiKey === "") {
     throw new Error("API Key is missing or undefined. Ensure it's set in your deployment environment secrets.");
   }
   return new GoogleGenAI({ apiKey });
@@ -22,7 +22,7 @@ export const generateGameData = async (customTopic: string = "Christmas Traditio
       3. Create 1 "Final Jeopardy" question (category, clue, and answer) about "${customTopic}".
       4. Clue format: A statement like "This reindeer is famous for his red nose."
       5. Answer format: A question like "Who is Rudolph?"
-      Return ONLY a raw JSON object.`;
+      Return ONLY a raw JSON object. Do not include any extra text.`;
 
     const response = await ai.models.generateContent({
       model: modelId,
@@ -80,13 +80,14 @@ export const generateGameData = async (customTopic: string = "Christmas Traditio
       
       const data = JSON.parse(cleanJson) as GameData;
       
-      // Ensure IDs and state are properly initialized
+      // Ensure IDs and state are properly initialized with unique values
+      const timestamp = Date.now();
       data.categories = data.categories.map((cat, catIdx) => ({
         ...cat,
-        id: `cat-${catIdx}-${Date.now()}`,
+        id: `cat-${catIdx}-${timestamp}`,
         questions: (cat.questions || []).map((q, qIdx) => ({
           ...q,
-          id: `q-${catIdx}-${qIdx}-${Date.now()}`,
+          id: `q-${catIdx}-${qIdx}-${timestamp}`,
           isAnswered: false
         }))
       }));

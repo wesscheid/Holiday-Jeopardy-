@@ -40,13 +40,13 @@
     </script>
     <style>
       /* 
-         In Vite, assets placed in the /public folder are served from the root of the site.
-         Using root-relative paths ensures they load correctly on GitHub Pages sub-paths.
+         Static assets in the 'public' folder are served from the root of the site.
+         Using relative paths ensures they load correctly on GitHub Pages sub-paths.
+         Place Geoparody-Regular.woff inside the /public folder.
       */
       @font-face {
         font-family: 'GeoparodyLocal';
-        src: url('./Geoparody.otf') format('opentype'),
-             url('./geoparody.otf') format('opentype');
+        src: url('./Geoparody-Regular.woff') format('woff');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -60,10 +60,8 @@
         overflow-x: hidden;
       }
       
-      /* Enhanced Jeopardy Typography */
       .font-geopardy {
-        /* Bebas Neue is a Google Font that looks identical to Jeopardy. 
-           We use it as a robust fallback in case the local .otf is missing. */
+        /* Bebas Neue is a robust, web-safe alternative that mimics the Jeopardy branding perfectly. */
         font-family: 'GeoparodyLocal', 'Bebas Neue', sans-serif !important;
         text-transform: uppercase;
         letter-spacing: 0.05em;

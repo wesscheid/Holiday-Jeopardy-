@@ -131,14 +131,14 @@ const App: React.FC = () => {
         {isFullScreen ? <Minimize className="w-6 h-6" /> : <Maximize className="w-6 h-6" />}
       </button>
 
-      <div className="relative z-10 container mx-auto px-4 py-8 flex flex-col min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 py-2 flex flex-col min-h-screen">
         
         {gameState !== GameState.GAME_OVER && (
-          <header className="text-center mb-12 relative">
+          <header className="text-center mb-4 relative">
              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-red-900/20 blur-3xl rounded-full -z-10"></div>
              
              {/* Replaced Text Headline with Image - Corrected path casing */}
-             <div className="flex justify-center items-center mb-4">
+             <div className="flex justify-center items-center mb-2">
                <img 
                  src="holidayJeopardy.png" 
                  alt="Holiday Jeopardy" 

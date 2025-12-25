@@ -39,10 +39,18 @@
       }
     </script>
     <style>
+      /* 
+         Attempting several pathing and casing variations to resolve 404.
+         Browsers will try these in order until one works. 
+      */
       @font-face {
         font-family: 'Geoparody';
-        src: url('geoparody.otf') format('opentype'),
-             url('geoparody.otf') format('truetype');
+        src: url('./Geoparody.otf') format('opentype'),
+             url('Geoparody.otf') format('opentype'),
+             url('./geoparody.otf') format('opentype'),
+             url('geoparody.otf') format('opentype'),
+             url('./Geoparody.otf') format('truetype'),
+             url('./geoparody.otf') format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;

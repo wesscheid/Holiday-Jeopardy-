@@ -138,7 +138,7 @@ const App: React.FC = () => {
              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-red-900/20 blur-3xl rounded-full -z-10"></div>
              <h1 className="flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-0 leading-none">
                <span className="font-vibes text-7xl md:text-9xl text-hol-gold drop-shadow-lg pr-4">Holiday</span>
-               <span className="font-geopardy font-geopardy-force text-5xl md:text-8xl text-white tracking-[0.1em] drop-shadow-lg md:mt-8 uppercase">Jeopardy</span>
+               <span className="font-geopardy text-5xl md:text-8xl text-white tracking-[0.1em] drop-shadow-lg md:mt-8 uppercase">Jeopardy</span>
              </h1>
              {gameState === GameState.PLAYING && (
                <p className="text-gray-300 mt-6 font-montserrat font-semibold text-lg uppercase tracking-[0.3em] opacity-80">Select a clue to begin</p>

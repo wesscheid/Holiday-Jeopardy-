@@ -137,10 +137,10 @@ const App: React.FC = () => {
           <header className="text-center mb-12 relative">
              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-red-900/20 blur-3xl rounded-full -z-10"></div>
              
-             {/* Replaced Text Headline with Image */}
+             {/* Replaced Text Headline with Image - Corrected path casing */}
              <div className="flex justify-center items-center mb-4">
                <img 
-                 src="/holidayJeopardy.png" 
+                 src="./holidayJeopardy.png" 
                  alt="Holiday Jeopardy" 
                  className="max-w-[90%] md:max-w-2xl h-auto object-contain drop-shadow-2xl"
                />

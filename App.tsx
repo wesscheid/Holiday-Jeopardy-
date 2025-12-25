@@ -137,7 +137,7 @@ const App: React.FC = () => {
         {gameState !== GameState.GAME_OVER && (
           <header className="text-center mb-8 relative">
              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-red-900/20 blur-3xl rounded-full -z-10"></div>
-             <h1 className="font-christmas text-6xl md:text-7xl text-hol-gold drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
+             <h1 className="font-frijole text-4xl md:text-7xl text-hol-gold drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tighter md:tracking-normal">
                Holiday Jeopardy
              </h1>
              {gameState === GameState.PLAYING && (

@@ -89,7 +89,7 @@ const FinalJeopardy: React.FC<FinalJeopardyProps> = ({ data, teams, onUpdateScor
           {step === 'CATEGORY' && (
              <div className="animate-in zoom-in duration-500">
                <h2 className="text-2xl text-hol-gold font-slab mb-4 uppercase tracking-wider">Category</h2>
-               <h1 className="text-4xl md:text-6xl font-christmas text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+               <h1 className="text-4xl md:text-6xl font-frijole text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                  {data.category}
                </h1>
              </div>

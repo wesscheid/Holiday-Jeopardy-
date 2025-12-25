@@ -29,7 +29,7 @@ const GameOver: React.FC<GameOverProps> = ({ teams, onRestart }) => {
             <Trophy className="w-32 h-32 text-hol-gold mx-auto mb-6 drop-shadow-lg" />
             
             <h2 className="text-2xl text-hol-red font-bold font-slab uppercase tracking-widest mb-2">Champion</h2>
-            <h1 className="text-6xl md:text-8xl font-christmas text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-6">
+            <h1 className="text-5xl md:text-8xl font-frijole text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] mb-6">
                {winner?.name || "Everyone!"}
             </h1>
             <div className="text-4xl font-mono text-hol-gold font-bold mb-12">

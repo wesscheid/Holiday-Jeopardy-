@@ -55,7 +55,6 @@ const App: React.FC = () => {
       setGameState(GameState.PLAYING);
     } catch (err: any) {
       console.error("Game generation failed:", err);
-      // More descriptive error for the host if API key is likely the culprit
       const isApiKeyMissing = err.message?.includes("API Key") || (typeof process !== 'undefined' && !process.env.API_KEY);
       
       const errorMsg = isApiKeyMissing
@@ -135,13 +134,14 @@ const App: React.FC = () => {
       <div className="relative z-10 container mx-auto px-4 py-8 flex flex-col min-h-screen">
         
         {gameState !== GameState.GAME_OVER && (
-          <header className="text-center mb-8 relative">
+          <header className="text-center mb-12 relative">
              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-red-900/20 blur-3xl rounded-full -z-10"></div>
-             <h1 className="font-frijole text-4xl md:text-7xl text-hol-gold drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tighter md:tracking-normal">
-               Holiday Jeopardy
+             <h1 className="flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-0 leading-none">
+               <span className="font-vibes text-7xl md:text-9xl text-hol-gold drop-shadow-lg pr-4">Holiday</span>
+               <span className="font-geopardy font-geopardy-force text-5xl md:text-8xl text-white tracking-[0.1em] drop-shadow-lg md:mt-8 uppercase">Jeopardy</span>
              </h1>
              {gameState === GameState.PLAYING && (
-               <p className="text-gray-300 mt-2 font-slab text-lg">Select a clue to begin</p>
+               <p className="text-gray-300 mt-6 font-montserrat font-semibold text-lg uppercase tracking-[0.3em] opacity-80">Select a clue to begin</p>
              )}
           </header>
         )}
@@ -162,19 +162,19 @@ const App: React.FC = () => {
               <h2 className="text-3xl font-slab font-bold text-center mb-6">Start New Game</h2>
               
               <div className="mb-6">
-                <label className="block text-sm font-bold mb-2 text-hol-gold uppercase tracking-wider">Game Topic</label>
+                <label className="block text-sm font-bold mb-2 text-hol-gold uppercase tracking-wider font-montserrat">Game Topic</label>
                 <input 
                   type="text" 
                   value={customTopic}
                   onChange={(e) => setCustomTopic(e.target.value)}
-                  className="w-full bg-black/40 border border-hol-gold/50 rounded-lg p-3 text-white focus:outline-none focus:border-hol-gold focus:ring-1 focus:ring-hol-gold transition-all"
+                  className="w-full bg-black/40 border border-hol-gold/50 rounded-lg p-3 text-white focus:outline-none focus:border-hol-gold focus:ring-1 focus:ring-hol-gold transition-all font-montserrat"
                   placeholder="e.g. Christmas Movies, Holiday Food..."
                 />
               </div>
 
               <div className="mb-8">
                  <div className="mb-2">
-                    <label className="block text-sm font-bold text-hol-gold uppercase tracking-wider">Teams</label>
+                    <label className="block text-sm font-bold text-hol-gold uppercase tracking-wider font-montserrat">Teams</label>
                  </div>
                  <div className="space-y-3 mb-4">
                     {teams.map((team, idx) => (
@@ -187,7 +187,7 @@ const App: React.FC = () => {
                             newTeams[idx].name = e.target.value;
                             setTeams(newTeams);
                           }}
-                          className="flex-1 bg-black/40 border border-gray-600 rounded-lg p-2 text-sm focus:border-hol-gold focus:outline-none text-white"
+                          className="flex-1 bg-black/40 border border-gray-600 rounded-lg p-2 text-sm focus:border-hol-gold focus:outline-none text-white font-montserrat"
                           placeholder="Team Name"
                          />
                          {teams.length > 1 && (
@@ -205,7 +205,7 @@ const App: React.FC = () => {
                  <button 
                     onClick={addTeam}
                     disabled={teams.length >= 5}
-                    className="w-full text-xs flex items-center justify-center gap-2 bg-hol-green/10 hover:bg-hol-green/20 text-hol-green border border-hol-green/30 px-3 py-2 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed group"
+                    className="w-full text-xs flex items-center justify-center gap-2 bg-hol-green/10 hover:bg-hol-green/20 text-hol-green border border-hol-green/30 px-3 py-2 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed group font-montserrat uppercase font-semibold"
                  >
                     <Plus className="w-3 h-3 group-hover:scale-125 transition-transform" /> Add Another Team
                  </button>
@@ -213,7 +213,7 @@ const App: React.FC = () => {
 
               <button 
                 onClick={startGame}
-                className="w-full bg-gradient-to-r from-hol-red to-red-600 hover:from-red-600 hover:to-hol-red text-white font-bold py-4 rounded-xl shadow-lg transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group"
+                className="w-full bg-gradient-to-r from-hol-red to-red-600 hover:from-red-600 hover:to-hol-red text-white font-bold py-4 rounded-xl shadow-lg transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group font-montserrat uppercase tracking-widest"
               >
                 <Play className="w-5 h-5 fill-current" />
                 Build Game Board
@@ -225,8 +225,8 @@ const App: React.FC = () => {
         {gameState === GameState.LOADING && (
           <div className="flex-1 flex flex-col items-center justify-center">
             <Loader2 className="w-16 h-16 text-hol-gold animate-spin mb-4" />
-            <h2 className="text-2xl font-slab font-bold animate-pulse">Asking Santa's Elves (Gemini)...</h2>
-            <p className="text-gray-400 mt-2 text-center italic">Crafting questions about "{customTopic}"</p>
+            <h2 className="text-2xl font-slab font-bold animate-pulse uppercase tracking-wider">Asking Santa's Elves...</h2>
+            <p className="text-gray-400 mt-2 text-center italic font-montserrat">Crafting questions about "{customTopic}"</p>
           </div>
         )}
 
@@ -237,10 +237,10 @@ const App: React.FC = () => {
               onQuestionClick={handleQuestionClick}
             />
             {checkAllQuestionsAnswered() && (
-               <div className="my-6 flex justify-center animate-in bounce-in duration-1000">
+               <div className="my-10 flex justify-center animate-in bounce-in duration-1000">
                   <button 
                      onClick={() => setGameState(GameState.FINAL_JEOPARDY)}
-                     className="bg-gradient-to-r from-hol-gold to-yellow-600 hover:from-yellow-400 hover:to-yellow-700 text-hol-dark font-bold text-2xl py-4 px-10 rounded-full shadow-2xl transform hover:scale-105 transition-all flex items-center gap-3 border-4 border-white/20"
+                     className="bg-gradient-to-r from-hol-gold to-yellow-600 hover:from-yellow-400 hover:to-yellow-700 text-hol-dark font-bold text-2xl py-5 px-12 rounded-full shadow-2xl transform hover:scale-105 transition-all flex items-center gap-4 border-4 border-white/30 font-montserrat uppercase tracking-widest"
                   >
                      Go to Final Jeopardy <ArrowRight className="w-8 h-8" />
                   </button>

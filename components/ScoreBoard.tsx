@@ -15,7 +15,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ teams, onUpdateScore }) => {
           <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-hol-dark border border-hol-gold rounded-full p-2">
             <Users className="w-6 h-6 text-hol-gold" />
           </div>
-          <h3 className="text-center font-frijole text-lg mt-2 mb-2 font-bold tracking-wider text-hol-gold drop-shadow-sm">{team.name}</h3>
+          <h3 className="text-center font-julius text-lg mt-2 mb-2 font-bold tracking-wider text-hol-gold drop-shadow-sm">{team.name}</h3>
           <div className="text-center text-4xl font-slab font-bold mb-4 drop-shadow-md">
             ${team.score}
           </div>

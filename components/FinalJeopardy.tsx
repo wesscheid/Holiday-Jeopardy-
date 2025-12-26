@@ -163,7 +163,7 @@ const FinalJeopardy: React.FC<FinalJeopardyProps> = ({ data, teams, onUpdateScor
              <div key={team.id} className="bg-hol-dark border border-gray-700 p-6 rounded-2xl flex flex-col gap-4 shadow-xl">
                 <div className="flex justify-between items-center border-b border-gray-800 pb-3">
                    <span className="font-montserrat font-semibold text-lg uppercase tracking-wider text-gray-200">{team.name}</span>
-                   <span className="font-mono text-2xl text-hol-gold">${team.score}</span>
+                   <span className="font-inter font-bold text-2xl text-hol-gold">${team.score}</span>
                 </div>
                 <div className="flex items-center gap-3">
                    <span className="text-[10px] text-gray-400 font-montserrat uppercase font-bold tracking-widest">Wager:</span>

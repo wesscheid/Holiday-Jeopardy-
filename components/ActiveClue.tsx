@@ -79,7 +79,7 @@ const ActiveClue: React.FC<ActiveClueProps> = ({ question, teams, onClose, onAwa
         
         {/* Header */}
         <div className="bg-hol-red p-4 flex justify-between items-center border-b-2 border-hol-gold">
-          <div className="text-hol-gold font-montserrat font-semibold text-3xl drop-shadow-sm">${question.value}</div>
+          <div className="text-hol-gold font-inter font-bold text-3xl drop-shadow-sm">${question.value}</div>
           <div className="flex items-center gap-4">
              <div className={`flex items-center gap-2 font-mono text-2xl font-bold ${timeLeft < 10 ? 'text-red-400 animate-pulse' : 'text-white'}`}>
                 <Timer className="w-6 h-6" />
@@ -174,7 +174,7 @@ const ActiveClue: React.FC<ActiveClueProps> = ({ question, teams, onClose, onAwa
                 className="group relative flex items-center gap-3 px-5 py-2.5 bg-hol-dark border border-hol-green rounded-lg hover:bg-hol-green transition-all font-montserrat"
               >
                 <span className="text-white font-bold text-sm tracking-wide">{team.name}</span>
-                <span className="bg-hol-gold text-hol-dark text-[10px] font-bold px-2 py-0.5 rounded-full group-hover:bg-white transition-colors">
+                <span className="bg-hol-gold text-hol-dark text-[10px] font-inter font-bold px-2 py-0.5 rounded-full group-hover:bg-white transition-colors">
                   +${question.value}
                 </span>
               </button>

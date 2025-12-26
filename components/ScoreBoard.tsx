@@ -24,7 +24,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ teams, onUpdateScore }) => {
               <h3 className="font-montserrat text-xs md:text-sm lg:text-base font-bold tracking-wider text-hol-gold drop-shadow-sm truncate px-1" title={team.name}>
                 {team.name}
               </h3>
-              <div className="text-xl md:text-3xl font-slab font-bold my-1 md:my-2 drop-shadow-md truncate">
+              <div className="text-xl md:text-3xl font-inter font-bold my-1 md:my-2 drop-shadow-md truncate">
                 ${team.score}
               </div>
             </div>

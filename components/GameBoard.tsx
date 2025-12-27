@@ -17,7 +17,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ data, onQuestionClick }) => {
             key={category.id} 
             className="aspect-[4/3] bg-hol-dark border-2 border-hol-gold rounded-lg shadow-lg flex items-center justify-center p-1 md:p-3 text-center transform hover:-translate-y-1 transition-transform duration-300 overflow-hidden"
           >
-            <h3 className="text-white font-special-gothic text-[10px] sm:text-xs md:text-sm lg:text-lg uppercase tracking-widest drop-shadow-md leading-tight hyphenate max-h-full">
+            <h3 className="text-white font-special-gothic text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-widest drop-shadow-md leading-tight hyphenate max-h-full">
               {category.title}
             </h3>
           </div>
